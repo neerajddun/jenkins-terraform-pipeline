@@ -1,4 +1,5 @@
 pipeline {
+
   environment {
     dockerimagename = "neeraj91/react-app"
     dockerImage = ""
@@ -32,7 +33,7 @@ pipeline {
     stage('Deploy to Kubernetes') {
   steps {
     withKubeConfig(credentialsId: 'kube-credentials') {
-      sh "kubectl apply -f k8s/deployment.yaml"
+      sh "kubectl apply -f deployment.yaml"
     }
   }
 }
