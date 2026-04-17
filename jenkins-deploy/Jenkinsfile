@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/neerajddun/jenkins-pipleine.git'
+        git 'https://github.com/neerajddun/jenkins-pipeline.git'
       }
     }
     stage('Build image') {
