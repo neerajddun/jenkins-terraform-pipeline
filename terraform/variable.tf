@@ -1,7 +1,7 @@
 variable "bucket" {
-    default = "neeraj-bucket@1234"
+  default = "neeraj-react-artifacts-1234"
 }
 
 variable "region" {
-    default = "us-east-1"
+  default = "ap-southeast-1"
 }
