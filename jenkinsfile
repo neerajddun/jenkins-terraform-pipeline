@@ -3,7 +3,6 @@ pipeline {
   environment {
     dockerimagename = "neeraj91/react-app"
     dockerImage = ""
-    KUBECONFIG      = "/var/lib/jenkins/.kube/config"
   }
 
   agent any
