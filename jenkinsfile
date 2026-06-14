@@ -2,7 +2,7 @@ pipeline {
 
   environment {
     dockerimagename = "neeraj91/react-app"
-    
+
   }
 
   agent any
@@ -89,8 +89,8 @@ stage('Deploy to Kubernetes') {
       withCredentials([file(credentialsId: 'kube-creds', variable: 'KUBECONFIG')]) {
         sh 'kubectl apply -f deployment.yaml'
         sh 'kubectl apply -f service.yaml'
-        sh 'kubectl rollout status deployment/react-app'
-      }
+
+     }
     }
   }
     }
