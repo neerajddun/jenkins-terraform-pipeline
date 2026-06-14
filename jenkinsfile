@@ -81,8 +81,7 @@ stage('upload arifacts to s3')
 {
   steps {
     dir('demo') {
-      sh 'zip -r app.zip .'
-            sh 'aws s3 cp app.zip s3://neeraj-react-artifacts-1234/'
+       sh 'aws s3 sync demo/ s3://neeraj-react-artifacts-1234/builds/${BUILD_ID}/ --exclude ".terraform/*" --exclude "*.tfstate*" --exclude ".git/*"'
     }
   }
 }
