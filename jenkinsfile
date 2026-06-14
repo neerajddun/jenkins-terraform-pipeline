@@ -2,8 +2,7 @@ pipeline {
 
   environment {
     dockerimagename = "neeraj91/react-app"
-    dockerImage = ""
-
+    
   }
 
   agent any
@@ -41,29 +40,28 @@ pipeline {
     }
 
 */
-    stage('Build image') {
-    steps {
-        dir('demo') {
-            script {
-                dockerImage = docker.build("${dockerimagename}")
-            }
-        }
+   stage('Build Image') {
+  steps {
+    dir('demo') {
+      sh "docker build -t ${dockerimagename} ."
     }
+  }
 }
 
 stage('Pushing Image') {
-    environment {
-        registryCredential = 'dockerhub-credentials'
+  environment {
+    registryCredential = 'dockerhub-credentials'
+  }
+  steps {
+    withCredentials([usernamePassword(
+      credentialsId: 'dockerhub-credentials',
+      usernameVariable: 'DOCKER_USER',
+      passwordVariable: 'DOCKER_PASS'
+    )]) {
+      sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+      sh "docker push ${dockerimagename}:latest"
     }
-    steps {
-        dir('demo') {
-            script {
-                docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-                    dockerImage.push("latest")
-                }
-            }
-        }
-    }
+  }
 }
 
 stage('Terraform') {
