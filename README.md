@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🌍 Environment Variables
 
-## Available Scripts
+| Variable | Value | Description |
+|----------|-------|-------------|
+| `dockerimagename` | `neeraj91/react-app` | Docker image name |
+| `AWS_DEFAULT_REGION` | `ap-southeast-1` | AWS region for S3 |
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📦 Terraform Resources
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Resource | Name | Region |
+|----------|------|--------|
+| S3 Bucket | `neeraj-react-artifacts-1234` | ap-southeast-1 |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ☸️ Kubernetes Resources
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Resource | Name |
+|----------|------|
+| Deployment | `deployment` |
+| Service | `service` |
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🔒 Security
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Docker credentials stored securely in Jenkins credentials store
+- AWS credentials managed via Jenkins AWS Credentials plugin
+- Kubeconfig stored as Jenkins secret file
+- Sensitive files excluded via `.gitignore` and `.dockerignore`:
+  - `*.pem` — SSH keys
+  - `*.tfstate` — Terraform state files
+  - `.terraform/` — Provider plugins
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject `
-### my name is 'neerajbij'
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 📝 Notes
 
-If you aren't satisfied with the build tool and configuration choices, you can `ejects` at any time. This command will remove the single build dependency from your project.
+- Minikube API port changes on every restart — always start with fixed port:
+```bash
+minikube start --apiserver-port=8443
+```
+- S3 artifacts are organized by `BUILD_ID` for easy versioning
+- SonarQube and Quality Gate stages are disabled by default — enable when SonarQube server is configured
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 👤 Author
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-## Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Neeraj Bijalwan**
+- GitHub: [@neerajddun](https://github.com/neerajddun)
+- Docker Hub: [neeraj91](https://hub.docker.com/u/neeraj91)
