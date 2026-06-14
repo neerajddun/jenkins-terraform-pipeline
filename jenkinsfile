@@ -81,7 +81,7 @@ stage('upload arifacts to s3')
 {
   steps {
     dir('demo') {
-       sh 'aws s3 sync demo/ s3://neeraj-react-artifacts-1234/builds/${BUILD_ID}/ --exclude ".terraform/*" --exclude "*.tfstate*" --exclude ".git/*"'
+       sh 'aws s3 sync demo/terraform/ s3://neeraj-react-artifacts-1234/builds/${BUILD_ID}/ --exclude ".terraform/*" --exclude "*.tfstate*" --exclude ".git/*"'
     }
   }
 }
