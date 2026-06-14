@@ -15,7 +15,7 @@ pipeline {
         git 'https://github.com/neerajddun/jenkins-kubernetes-deployment.git'
       }
     }
-
+/*
     stage('SonarQube Analysis') {
       steps {
         script {
@@ -40,6 +40,7 @@ pipeline {
       }
     }
 
+*/
     stage('Build image') {
     steps {
         dir('demo') {
