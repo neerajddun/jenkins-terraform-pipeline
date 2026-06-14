@@ -3,6 +3,7 @@ pipeline {
   environment {
     dockerimagename = "neeraj91/react-app"
     dockerImage = ""
+
   }
 
   agent any
@@ -84,17 +85,16 @@ stage('upload arifacts to s3')
     }
   }
 }
-
-    stage('Deploy to Kubernetes') {
-      steps {
-        dir('demo'){
-            script {
-
-          sh "kubectl apply -f deployment.yaml "
-          sh "kubectl apply -f service.yaml "
-            }
-        }
+stage('Deploy to Kubernetes') {
+  steps {
+    dir('demo') {
+      withCredentials([file(credentialsId: 'kube-creds', variable: 'KUBECONFIG')]) {
+        sh 'kubectl apply -f deployment.yaml'
+        sh 'kubectl apply -f service.yaml'
+        sh 'kubectl rollout status deployment/react-app'
       }
+    }
+  }
     }
   }
 
